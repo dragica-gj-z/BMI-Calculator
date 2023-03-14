@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI-Calculator</title>
+
+    <style>
+        body {
+            background-image: url(5.jpg);
+            text-align: center;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #fff;
+        }
+        h2 {
+            font-size: 2rem;
+            color: #000;
+        }
+        h3 {
+            font-size: 1.2rem;
+            color: #000;
+        }
+        .container{
+            background-color: #ffffff;
+            padding: 3rem 3rem;
+            width: 400px;
+            height: 450px;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 5px;
+            font-family: sans-serif;
+            box-shadow: 7px 7px 1px #C5C8D9;
+        }
+        .inputConteiner {
+            display: block;
+            padding: 0.3rem; 
+        }
+        .inputElements {
+            padding: 0.2rem;
+            margin: 1rem;
+        }
+        label, input {
+            color: #737373;
+        }
+        button {
+            width: 110px;
+            height: 40px;
+            padding: 0.2rem;
+            margin: 1rem;
+            background-color: #363C59;
+            color: #C5C8D9;
+            border-radius: 5px;
+        }
+        .wishingWeight {
+            color: #737373;
+            font-size: 0.8rem;
+        }
+    </style>
+    
+<body>
+    <h1>Calculate your body mass index!</h1>
+<div class="container" width="40" height="100">   
+    <h2>BMI-Calculator</h2> 
+    <div class="inputConteiner">
+        <label class="inputElements" for="weight">Weight (kg)</label>
+        <input class="inputElements" id="weight" type="number" min="5" max="150"><br>
+
+        <label class="inputElements" for="height">Height (m)</label>
+        <input class="inputElements" id="height" type="number" min="50" max="250">
+    </div>
+    <button onclick="bmiCalculator()">Calculate</button>
+    <button onclick="reload()">Clear</button>
+
+    <h3 id="heading"></h3>
+    <p id="result"></p>
+    <p id="message"></p>
+    <p class="wishingWeight" id="weightNeedToBe"></p>
+</div>
+    <script>
+// function
+        function bmiCalculator() {
+            //taking values from input field
+            let weight = document.getElementById("weight").value
+            let height = document.getElementById("height").value
+            //calculating bmi 
+            let bmi = weight / Math.pow(height, 2);
+            bmi = bmi.toFixed(2);
+            //calculate how much should user weight
+            let maxWeight = 24.9 * Math.pow(height, 2);
+            maxWeight = maxWeight.toFixed(2);
+            let minWeight = 18.5 * Math.pow(height, 2);
+            minWeight = minWeight.toFixed(2);
+            // with inner.HTML we write the text that we wont to be shown to the user
+            // so the message should be: Your BMI is: 15.6
+            document.getElementById("heading").innerHTML = "Your BMI is:"
+            document.getElementById("result").innerHTML = bmi
+            document.getElementById("weightNeedToBe").innerHTML = "Your weight should be between " + minWeight + "kg and " + maxWeight + "kg !";
+
+        // output
+        if (bmi < 18.5) {
+            //return "Your BMI is " + bmi + ", so you are underweight"
+            document.getElementById("message").innerHTML = "You are underweight!"
+        }
+        if (bmi > 18.5 && bmi <= 24.9) {
+            //return "Your BMI is " + bmi + ", so you are normal weight"
+
+            document.getElementById("message").innerHTML = "You have a normal weight!"
+        }
+        if (bmi > 24.9) {
+            //return "Your BMI is " + bmi + ", so you are overweight"
+
+            document.getElementById("message").innerHTML = "You are overweight!"
+        }
+        }
+
+        function reload() {
+            window.location.reload()
+        }
+    </script>
+</body>
+
+</html>
+
